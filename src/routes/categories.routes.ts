@@ -6,11 +6,11 @@ import CreateCategoryService from '../services/CreateCategoryService';
 import DeleteCategoryService from '../services/DeleteCategoryService';
 import UpdateCategoryService from '../services/UpdateCategoryService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureOwnerAuthenticated from '../middlewares/ensureOwnerAuthenticated';
 
 const categoriesRouter = Router();
 
-categoriesRouter.use(ensureAuthenticated);
+categoriesRouter.use(ensureOwnerAuthenticated);
 
 categoriesRouter.get('/', async (request, response) => {
   const categoriesRepository = getRepository(Category);

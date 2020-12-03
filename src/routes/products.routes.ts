@@ -7,11 +7,11 @@ import CreateProductService from '../services/CreateProductService';
 import DeleteProductService from '../services/DeleteProductService';
 import UpdateProductService from '../services/UpdateProductService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureOwnerAuthenticated from '../middlewares/ensureOwnerAuthenticated';
 
 const productsRouter = Router();
 
-productsRouter.use(ensureAuthenticated);
+productsRouter.use(ensureOwnerAuthenticated);
 
 productsRouter.get('/', async (request, response) => {
   const productsRepository = getRepository(Product);
