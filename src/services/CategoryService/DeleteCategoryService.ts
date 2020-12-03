@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
 
-import Category from '../models/Category';
-import Product from '../models/Product';
-import AppError from '../errors/AppError';
+import Category from '../../models/Category';
+import Product from '../../models/Product';
+import AppError from '../../errors/AppError';
 
 interface Request {
   id: string;

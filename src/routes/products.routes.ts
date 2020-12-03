@@ -3,9 +3,9 @@ import { getRepository } from 'typeorm';
 
 import Product from '../models/Product';
 
-import CreateProductService from '../services/CreateProductService';
-import DeleteProductService from '../services/DeleteProductService';
-import UpdateProductService from '../services/UpdateProductService';
+import CreateProductService from '../services/ProductService/CreateProductService';
+import DeleteProductService from '../services/ProductService/DeleteProductService';
+import UpdateProductService from '../services/ProductService/UpdateProductService';
 
 import ensureOwnerAuthenticated from '../middlewares/ensureOwnerAuthenticated';
 

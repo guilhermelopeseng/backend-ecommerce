@@ -10,8 +10,8 @@ const cartsRouter = Router();
 
 cartsRouter.use(ensureAuthenticated);
 
-cartsRouter.get('/:id', async (request, response) => {
-  const { id } = request.params;
+cartsRouter.get('/', async (request, response) => {
+  const { id } = request.user;
 
   const cartsRepository = getRepository(Cart);
 
@@ -25,16 +25,16 @@ cartsRouter.get('/:id', async (request, response) => {
 });
 
 cartsRouter.post('/', async (request, response) => {
-  const { user_id, product_id, quantites, descont, state } = request.body;
+  const { id } = request.user;
+  const { product_id, quantites, descont } = request.body;
 
   const createCart = new CreateCartService();
 
   const cart = await createCart.execute({
-    user_id,
+    user_id: id,
     product_id,
     quantites,
     descont,
-    state,
   });
 
   return response.json(cart);

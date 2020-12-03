@@ -10,20 +10,14 @@ interface Request {
   product_id: string;
   quantites: number;
   descont: number;
-  state:
-    | 'Selected'
-    | 'Payment in progress'
-    | 'Payment made'
-    | 'On the carrier'
-    | 'Made';
 }
+
 class CreateCartService {
   public async execute({
     user_id,
     product_id,
     quantites,
     descont,
-    state,
   }: Request): Promise<Cart> {
     const cartsRepository = getRepository(Cart);
     const productsRepository = getRepository(Product);
@@ -44,11 +38,34 @@ class CreateCartService {
       throw new AppError('This quantites is not permissible');
     }
 
+    const checkCartExist = await cartsRepository.findOne({
+      where: { product_id },
+    });
+
+    if (checkCartExist) {
+      if (checkCartExist.quantites + quantites > checkProductExist.quantites) {
+        throw new AppError('This quantities is not permissible');
+      }
+      await cartsRepository.update(
+        { id: checkCartExist.id },
+        { quantites: quantites + checkCartExist.quantites }
+      );
+
+      const cart = await cartsRepository.findOne({
+        where: { id: checkCartExist.id },
+      });
+
+      if (!cart) {
+        throw new AppError('This updated not sucess');
+      }
+      return cart;
+    }
+
     const cart = cartsRepository.create({
       user_id,
       product_id,
       quantites,
-      state,
+      state: 'Selected',
       descont,
     });
 

@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-import Category from '../models/Category';
-import AppError from '../errors/AppError';
+import Category from '../../models/Category';
+import AppError from '../../errors/AppError';
 
 interface Request {
   name: string;

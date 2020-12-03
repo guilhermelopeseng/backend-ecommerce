@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
-import Product from '../models/Product';
-import Category from '../models/Category';
-import CreateCategoryService from './CreateCategoryService';
+import Product from '../../models/Product';
+import Category from '../../models/Category';
+import CreateCategoryService from '../CategoryService/CreateCategoryService';
 
 interface Request {
   category_name: string;

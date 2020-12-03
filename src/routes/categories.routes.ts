@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { getRepository } from 'typeorm';
 import Category from '../models/Category';
 
-import CreateCategoryService from '../services/CreateCategoryService';
-import DeleteCategoryService from '../services/DeleteCategoryService';
-import UpdateCategoryService from '../services/UpdateCategoryService';
+import CreateCategoryService from '../services/CategoryService/CreateCategoryService';
+import DeleteCategoryService from '../services/CategoryService/DeleteCategoryService';
+import UpdateCategoryService from '../services/CategoryService/UpdateCategoryService';
 
 import ensureOwnerAuthenticated from '../middlewares/ensureOwnerAuthenticated';
 
