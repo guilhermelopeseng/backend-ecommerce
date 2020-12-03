@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
+import multer from 'multer';
 import Product from '../models/Product';
 
 import CreateProductService from '../services/ProductService/CreateProductService';
@@ -8,8 +9,11 @@ import DeleteProductService from '../services/ProductService/DeleteProductServic
 import UpdateProductService from '../services/ProductService/UpdateProductService';
 
 import ensureOwnerAuthenticated from '../middlewares/ensureOwnerAuthenticated';
+import uploadConfig from '../config/upload';
+import UpdateProductImageService from '../services/ProductService/UpdateProductImageService';
 
 const productsRouter = Router();
+const upload = multer(uploadConfig);
 
 productsRouter.use(ensureOwnerAuthenticated);
 
@@ -64,5 +68,20 @@ productsRouter.put('/:id', async (request, response) => {
 
   return response.json(product);
 });
+
+productsRouter.patch(
+  '/image/:id',
+  upload.single('image'),
+  async (request, response) => {
+    const { id } = request.params;
+    const updateProductImage = new UpdateProductImageService();
+    const product = await updateProductImage.execute({
+      id,
+      imageFilename: request.file.filename,
+    });
+
+    return response.json(product);
+  }
+);
 
 export default productsRouter;

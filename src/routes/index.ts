@@ -11,13 +11,13 @@ import sessionsOwnerRouter from './sessionsOwner.routes';
 
 const routes = Router();
 
-routes.use('/category', categoriesRouter);
-routes.use('/products', productsRouter);
-routes.use('/users', usersRouter);
-routes.use('/sessions', sessionsRouter);
-routes.use('/sales', salesRouter);
-routes.use('/carts', cartsRouter);
-routes.use('/owner', ownerRouter);
-routes.use('/ownersessions', sessionsOwnerRouter);
+routes.use('/category', categoriesRouter); // rota para criação, delete, atualização das categorias
+routes.use('/products', productsRouter); // rota para criação, delete, autualização dos produtos
+routes.use('/users', usersRouter); // rota para criação dos usuários
+routes.use('/sessions', sessionsRouter); // rota para autenticação dos usuários
+routes.use('/sales', salesRouter); // rota para efetuar uma venda
+routes.use('/carts', cartsRouter); // rota para o carrinho, contendo o usuário e o id do produto com as quantidades devidas
+routes.use('/owner', ownerRouter); // rota para criação de um proprietário
+routes.use('/ownersessions', sessionsOwnerRouter); // rota para atuenticar esse proprietário
 
 export default routes;

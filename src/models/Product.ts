@@ -34,6 +34,9 @@ class Product {
   @Column()
   description: string;
 
+  @Column()
+  image: string;
+
   @CreateDateColumn()
   created_at: Date;
 

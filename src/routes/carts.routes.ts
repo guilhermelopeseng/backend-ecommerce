@@ -11,6 +11,7 @@ const cartsRouter = Router();
 cartsRouter.use(ensureAuthenticated);
 
 cartsRouter.get('/', async (request, response) => {
+  // lista todos os produtos que o usuário tem no carrinho, precisa autenticar antes
   const { id } = request.user;
 
   const cartsRepository = getRepository(Cart);
@@ -25,6 +26,7 @@ cartsRouter.get('/', async (request, response) => {
 });
 
 cartsRouter.post('/', async (request, response) => {
+  // cria um novo produto no carrinho
   const { id } = request.user;
   const { product_id, quantites, descont } = request.body;
 
